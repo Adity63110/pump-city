@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUMP CITY</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="th-neon">
+<canvas id="canvas"></canvas>
+<div id="noise"></div>
+
+<!-- ══ INTRO CINEMATIC ══ -->
+<div id="intro">
+  <div id="intro-sky"></div>
+  <div id="intro-stars"></div>
+  <div id="intro-city">
+    <canvas id="intro-canvas"></canvas>
+    <div id="intro-fog"></div>
+  </div>
+  <div id="intro-vignette"></div>
+  <div id="intro-scanlines"></div>
+  <div id="intro-text">
+    <div class="intro-line intro-l1" id="il1">SOMEWHERE IN THE TRENCHES</div>
+    <div class="intro-line intro-l2" id="il2">WHERE TOKENS BECAME BUILDINGS</div>
+    <div class="intro-line intro-l3" id="il3">A CITY WAS BORN</div>
+    <div class="intro-line intro-l4" id="il4">PUMP <em>CITY</em></div>
+  </div>
+  <button id="intro-skip" onclick="skipIntro()">SKIP ›</button>
+</div>
+
+<!-- ══ LOADING ══ -->
+<div id="loading">
+  <div id="ld-stars"></div>
+  <div id="ld-moon"></div>
+  <div id="ld-city">
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bgrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a003a"/>
+          <stop offset="100%" stop-color="#080010"/>
+        </linearGradient>
+      </defs>
+      <!-- Silhouette buildings -->
+      <rect x="0" y="140" width="1440" height="60" fill="#060010"/>
+      <rect x="20" y="120" width="18" height="80" fill="url(#bgrad)"/>
+      <rect x="45" y="100" width="25" height="100" fill="url(#bgrad)"/>
+      <rect x="77" y="130" width="14" height="70" fill="url(#bgrad)"/>
+      <rect x="98" y="85" width="30" height="115" fill="url(#bgrad)"/>
+      <rect x="135" y="110" width="20" height="90" fill="url(#bgrad)"/>
+      <rect x="162" y="70" width="35" height="130" fill="url(#bgrad)"/>
+      <rect x="204" y="95" width="22" height="105" fill="url(#bgrad)"/>
+      <rect x="233" y="115" width="16" height="85" fill="url(#bgrad)"/>
+      <rect x="256" y="60" width="28" height="140" fill="url(#bgrad)"/>
+      <rect x="291" y="80" width="40" height="120" fill="url(#bgrad)"/>
+      <rect x="338" y="105" width="18" height="95" fill="url(#bgrad)"/>
+      <rect x="363" y="50" width="32" height="150" fill="url(#bgrad)"/>
+      <rect x="402" y="90" width="24" height="110" fill="url(#bgrad)"/>
+      <rect x="433" y="125" width="15" height="75" fill="url(#bgrad)"/>
+      <rect x="455" y="75" width="38" height="125" fill="url(#bgrad)"/>
+      <rect x="500" y="40" width="22" height="160" fill="url(#bgrad)"/>
+      <rect x="529" y="110" width="28" height="90" fill="url(#bgrad)"/>
+      <rect x="564" y="88" width="20" height="112" fill="url(#bgrad)"/>
+      <rect x="591" y="60" width="45" height="140" fill="url(#bgrad)"/>
+      <rect x="643" y="95" width="18" height="105" fill="url(#bgrad)"/>
+      <rect x="668" y="30" width="35" height="170" fill="url(#bgrad)"/>
+      <rect x="710" y="80" width="28" height="120" fill="url(#bgrad)"/>
+      <rect x="745" y="115" width="20" height="85" fill="url(#bgrad)"/>
+      <rect x="772" y="55" width="42" height="145" fill="url(#bgrad)"/>
+      <rect x="821" y="70" width="30" height="130" fill="url(#bgrad)"/>
+      <rect x="858" y="100" width="22" height="100" fill="url(#bgrad)"/>
+      <rect x="887" y="85" width="16" height="115" fill="url(#bgrad)"/>
+      <rect x="910" y="45" width="38" height="155" fill="url(#bgrad)"/>
+      <rect x="955" y="90" width="25" height="110" fill="url(#bgrad)"/>
+      <rect x="987" y="120" width="18" height="80" fill="url(#bgrad)"/>
+      <rect x="1012" y="65" width="32" height="135" fill="url(#bgrad)"/>
+      <rect x="1051" y="88" width="26" height="112" fill="url(#bgrad)"/>
+      <rect x="1084" y="110" width="20" height="90" fill="url(#bgrad)"/>
+      <rect x="1111" y="50" width="40" height="150" fill="url(#bgrad)"/>
+      <rect x="1158" y="75" width="28" height="125" fill="url(#bgrad)"/>
+      <rect x="1193" y="105" width="18" height="95" fill="url(#bgrad)"/>
+      <rect x="1218" y="60" width="35" height="140" fill="url(#bgrad)"/>
+      <rect x="1260" y="85" width="24" height="115" fill="url(#bgrad)"/>
+      <rect x="1291" y="125" width="16" height="75" fill="url(#bgrad)"/>
+      <rect x="1314" y="70" width="30" height="130" fill="url(#bgrad)"/>
+      <rect x="1351" y="95" width="22" height="105" fill="url(#bgrad)"/>
+      <rect x="1380" y="40" width="36" height="160" fill="url(#bgrad)"/>
+      <rect x="1423" y="115" width="20" height="85" fill="url(#bgrad)"/>
+      <!-- window lights -->
+      <rect x="166" y="90" width="3" height="3" fill="#ff2af4" opacity=".7"/>
+      <rect x="175" y="82" width="3" height="3" fill="#dd44ff" opacity=".5"/>
+      <rect x="265" y="72" width="3" height="3" fill="#ff2af4" opacity=".8"/>
+      <rect x="297" y="95" width="3" height="3" fill="#00e5ff" opacity=".6"/>
+      <rect x="370" y="62" width="3" height="3" fill="#ff2af4" opacity=".7"/>
+      <rect x="460" y="85" width="3" height="3" fill="#ffd700" opacity=".6"/>
+      <rect x="510" y="55" width="3" height="3" fill="#ff2af4" opacity=".9"/>
+      <rect x="596" y="72" width="3" height="3" fill="#dd44ff" opacity=".5"/>
+      <rect x="675" y="42" width="3" height="3" fill="#ff2af4" opacity=".8"/>
+      <rect x="780" y="65" width="3" height="3" fill="#00e5ff" opacity=".7"/>
+      <rect x="917" y="58" width="3" height="3" fill="#ff2af4" opacity=".6"/>
+      <rect x="1018" y="75" width="3" height="3" fill="#ffd700" opacity=".8"/>
+      <rect x="1120" y="62" width="3" height="3" fill="#ff2af4" opacity=".7"/>
+      <rect x="1225" y="72" width="3" height="3" fill="#dd44ff" opacity=".6"/>
+      <rect x="1390" y="52" width="3" height="3" fill="#ff2af4" opacity=".9"/>
+    </svg>
+  </div>
+
+  <div class="ld-logo">
+    <h1>PUMP <em>CITY</em></h1>
+    <div class="ld-sub">SOLANA TOKEN METROPOLIS · LIVE 24H DATA</div>
+  </div>
+  <div class="ld-bar-wrap">
+    <div class="ld-bar-inner" id="lb"><div class="ld-bar-glow"></div></div>
+  </div>
+  <div class="ld-status" id="lst">BOOTING...</div>
+</div>
+
+<!-- ── TICKER ── -->
+<div id="ticker"><div id="tki"></div></div>
+
+<!-- ── THEME SWITCHER ── -->
+<div id="theme-sw">
+  <span id="th-label">THEME</span>
+  <div class="th-btn t-neon active" title="NEON" onclick="setTheme('neon',this)"></div>
+  <div class="th-btn t-cyber" title="CYBER" onclick="setTheme('cyber',this)"></div>
+  <div class="th-btn t-gold" title="GOLD" onclick="setTheme('gold',this)"></div>
+  <div class="th-btn t-matrix" title="MATRIX" onclick="setTheme('matrix',this)"></div>
+  <div class="th-btn t-void" title="VOID" onclick="setTheme('void',this)"></div>
+</div>
+
+<!-- ══ HOMEPAGE ══ -->
+<div id="homepage">
+  <div id="sun">
+    <div id="sun-grad"></div>
+    <svg id="sun-lines" viewBox="0 0 360 210" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;">
+      <defs><linearGradient id="sfade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(0,0,0,0)"/>
+        <stop offset="100%" stop-color="rgba(3,0,8,0.9)"/>
+      </linearGradient></defs>
+      <rect x="0" y="108" width="360" height="3"  fill="rgba(200,55,145,.55)"/>
+      <rect x="0" y="123" width="360" height="4"  fill="rgba(175,38,132,.5)"/>
+      <rect x="0" y="140" width="360" height="5"  fill="rgba(152,22,120,.44)"/>
+      <rect x="0" y="160" width="360" height="6"  fill="rgba(128,8,108,.38)"/>
+      <rect x="0" y="183" width="360" height="27" fill="rgba(100,0,90,.32)"/>
+      <rect x="0" y="0"   width="360" height="210" fill="url(#sfade)"/>
+    </svg>
+  </div>
+  <div class="hp-logo">
+    <h1>PUMP <em>CITY</em></h1>
+    <p>SOLANA TOKEN METROPOLIS · LIVE 24H DATA</p>
+  </div>
+  <div id="hp-stats">
+    <div class="hs"><div class="hs-v" id="hp-n">—</div><div class="hs-l">TOKENS</div></div>
+    <div class="hs"><div class="hs-v" id="hp-v">—</div><div class="hs-l">TOTAL VOL</div></div>
+    <div class="hs"><div class="hs-v gu" id="hp-g">—</div><div class="hs-l">GAINERS</div></div>
+    <div class="hs"><div class="hs-v gd" id="hp-l">—</div><div class="hs-l">LOSERS</div></div>
+  </div>
+  <div id="hp-btns">
+    <button class="hb big" onclick="enterExplore()">◈ EXPLORE CITY<span class="bs">BROWSE ALL 150 BUILDINGS</span></button>
+    <div class="hp-row">
+      <button class="hb" onclick="showFlyInstr()">✦ FLY<span class="bs">FREE FLIGHT</span></button>
+      <button class="hb" onclick="showLB()">▲ LEADERBOARD<span class="bs">TOP 150 TOKENS</span></button>
+    </div>
+    <!-- ── SOCIAL LINKS ── -->
+    <div id="hp-social">
+      <!-- X (Twitter) link — update href below -->
+      <a href="https://x.com/YOUR_HANDLE" target="_blank" class="soc-link" title="X / Twitter">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <!-- Telegram link — update href below -->
+      <a href="https://t.me/YOUR_CHANNEL" target="_blank" class="soc-link" title="Telegram">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      </a>
+      <!-- pump.fun link — update href below -->
+      <a href="https://pump.fun/YOUR_TOKEN" target="_blank" class="soc-link" title="pump.fun">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 2c4.418 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8zm-1 3v2H9v2h2v2H9v2h2v2h2v-2h2v-2h-2v-2h2V9h-2V7h-2z"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LEADERBOARD ══ -->
+<div id="lbo">
+  <button id="lbo-esc" onclick="hideLB()">← BACK</button>
+  <h2>LEADERBOARD</h2>
+  <div class="lbs">TOP 10 SOLANA TOKENS · LIVE DATA</div>
+  <div id="lb-tabs">
+    <button class="lb-tab active" onclick="switchLBTab('vol',this)">▲ VOLUME</button>
+    <button class="lb-tab" onclick="switchLBTab('mc',this)">◈ MKT CAP</button>
+    <button class="lb-tab" onclick="switchLBTab('buys',this)">▲ MOST BOUGHT</button>
+    <button class="lb-tab" onclick="switchLBTab('sells',this)">▼ MOST SOLD</button>
+  </div>
+  <div id="lbt">
+    <div id="lb-panel-vol" class="lb-panel active">
+      <div class="lr h"><div>#</div><div></div><div>TOKEN</div><div>24H VOL</div><div>MKT CAP</div><div>CHANGE</div><div>BAR</div></div>
+      <div id="lbr-vol"></div>
+    </div>
+    <div id="lb-panel-mc" class="lb-panel">
+      <div class="lr h"><div>#</div><div></div><div>TOKEN</div><div>MKT CAP</div><div>24H VOL</div><div>CHANGE</div><div>BAR</div></div>
+      <div id="lbr-mc"></div>
+    </div>
+    <div id="lb-panel-buys" class="lb-panel">
+      <div class="lr h"><div>#</div><div></div><div>TOKEN</div><div>BUYS</div><div>24H VOL</div><div>CHANGE</div><div>BAR</div></div>
+      <div id="lbr-buys"></div>
+    </div>
+    <div id="lb-panel-sells" class="lb-panel">
+      <div class="lr h"><div>#</div><div></div><div>TOKEN</div><div>SELLS</div><div>24H VOL</div><div>CHANGE</div><div>BAR</div></div>
+      <div id="lbr-sells"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EXPLORE ══ -->
+<div id="ex">
+  <div id="ex-top">
+    <button id="ex-back" onclick="exitHome()">ESC BACK</button>
+    <div id="ex-ttl">⬡ PUMP CITY</div>
+    <div id="ex-cnt">— TOKENS</div>
+  </div>
+  <div id="ex-sw">
+    <input id="ex-si" type="text" placeholder="SEARCH TOKEN..." autocomplete="off" spellcheck="false">
+  </div>
+  <div id="ex-sr"></div>
+
+  <div id="sp">
+    <div id="sp-head">
+      <img id="sp-bg" src="" alt="">
+      <div id="sp-hc">
+        <div id="sp-lw"><img id="sp-lg" src="" alt=""><div id="sp-lr"></div></div>
+        <div id="sp-ht">
+          <div id="sp-rtag">RANK #<span id="sp-rn">—</span> BY VOLUME</div>
+          <div id="sp-nm">—</div>
+          <div id="sp-sym">—</div>
+        </div>
+      </div>
+      <button id="sp-x" onclick="closePanel()">×</button>
+    </div>
+    <div id="sp-body">
+      <div class="spr"><span class="sprl2">24H VOLUME</span><span class="sprv" id="sp-v">—</span></div>
+      <div class="spr"><span class="sprl2">MARKET CAP</span><span class="sprv" id="sp-m">—</span></div>
+      <div class="spr"><span class="sprl2">PRICE</span><span class="sprv w" id="sp-p">—</span></div>
+      <div class="spr"><span class="sprl2">24H CHANGE</span><span class="sprv" id="sp-c">—</span></div>
+      <div class="spr"><span class="sprl2">TRANSACTIONS</span><span class="sprv w" id="sp-t">—</span></div>
+      <div id="sp-ct"><div id="sp-cf"></div></div>
+      <canvas id="sp-sc" height="36"></canvas>
+    </div>
+    <div id="sp-acts">
+      <button class="spb ac" id="sp-dex">VIEW ON DEXSCREENER ↗</button>
+      <button class="spb" id="sp-bee">VIEW ON BIRDEYE ↗</button>
+      <button class="spb" id="sp-fly">✦ FLY TO THIS BUILDING</button>
+    </div>
+  </div>
+
+  <div id="mm"><canvas id="mmc"></canvas></div>
+  <div id="ex-hints"><b>DRAG</b> ORBIT &nbsp;<b>SCROLL</b> ZOOM<br><b>CLICK</b> SELECT BUILDING<br><b>G</b> SVG EXPORT</div>
+</div>
+
+<!-- ══ FLY ══ -->
+<!-- Instruction card shown before flying -->
+<div id="fly-instr" class="hidden">
+  <div id="fly-instr-card">
+    <h2>✦ FLY MODE</h2>
+    <div class="fi-sub">NAVIGATE YOUR PLANE THROUGH THE CITY</div>
+    <div class="fi-row">
+      <div class="fi-key">W / S</div>
+      <div class="fi-desc">Fly forward / fly backward</div>
+    </div>
+    <div class="fi-row">
+      <div class="fi-key">A / D</div>
+      <div class="fi-desc">Strafe left / strafe right</div>
+    </div>
+    <div class="fi-row">
+      <div class="fi-key">MOUSE</div>
+      <div class="fi-desc">Look around — steers your direction of flight</div>
+    </div>
+    <div class="fi-row">
+      <div class="fi-key">SCROLL</div>
+      <div class="fi-desc">Increase / decrease base flight speed</div>
+    </div>
+    <div class="fi-divider"></div>
+    <div class="fi-row">
+      <div class="fi-key" style="font-size:13px;">SHIFT</div>
+      <div class="fi-desc">Boost — 3× speed burst</div>
+    </div>
+    <div class="fi-row">
+      <div class="fi-key" style="font-size:13px;">SPACE</div>
+      <div class="fi-desc">Fly upward</div>
+    </div>
+    <div class="fi-row">
+      <div class="fi-key">Q</div>
+      <div class="fi-desc">Fly downward</div>
+    </div>
+    <div class="fi-row">
+      <div class="fi-key">CLICK</div>
+      <div class="fi-desc">Select building you're looking at</div>
+    </div>
+    <button id="fly-instr-start" onclick="startFlyMode()">▶ LAUNCH INTO THE CITY</button>
+  </div>
+</div>
+
+<div id="fly">
+  <div id="fly-top">
+    <button id="fly-back" onclick="exitHome()">ESC BACK</button>
+    <div id="fly-ttl">⬡ PUMP CITY — FLY MODE</div>
+    <div id="fly-clk" style="font-size:9px;letter-spacing:2px;color:rgba(255,42,244,.35)"></div>
+  </div>
+  <div id="fly-hud">
+    <div>ALT <span class="fv" id="h-alt">0</span>m</div>
+    <div>SPD <span class="fv" id="h-spd">0.0</span></div>
+    <div>BLD <span class="fv" id="h-bld">0</span></div>
+  </div>
+  <div id="fly-ctrl">
+    <b>W/S</b> FWD/BACK &nbsp;<b>A/D</b> STRAFE<br>
+    <b>SPACE/Q</b> UP/DOWN &nbsp;<b>SHIFT</b> BOOST<br>
+    <b>MOUSE</b> STEER &nbsp;<b>SCROLL</b> SPEED<br>
+    <b>CLICK</b> SELECT BUILDING
+  </div>
+  <div id="fly-ch"></div>
+  <div id="fly-lk" onclick="reqLock()">
+    <h3>CLICK TO FLY</h3>
+    <p>CLICK TO CAPTURE MOUSE · ESC TO RELEASE</p>
+  </div>
+</div>
+
+<div id="fr"></div>
+<div id="toast"></div>
+<div id="svgo">
+  <div id="svgc"></div>
+  <div style="display:flex;gap:10px">
+    <button class="svgbtn" onclick="dlSVG()">DOWNLOAD SVG</button>
+    <button class="svgbtn" onclick="closeSVG()">CLOSE</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="main.js"></script>
+</script>
+
+<!-- ══ UTILITY BUTTONS (bottom-right) ══ -->
+<audio id="lofi-audio" loop>
+  <!-- Replace src with your lofi audio URL -->
+  <source src="https://pixabay.com/music/lofi-lofi-lofi-chill-lofi-girl-491690/" type="audio/mpeg">
+</audio>
+<div id="util-btns">
+  <button class="util-btn" id="lofi-btn" onclick="toggleLofi()" title="Toggle lofi music">♫ LOFI</button>
+  <button class="util-btn" id="replay-btn" onclick="replayIntro()" title="Replay intro cinematic">↺ INTRO</button>
+</div>
+
+<script src="lofi.js"></script>
+</script>
+</body>
+</html>
