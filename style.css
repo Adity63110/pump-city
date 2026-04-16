@@ -144,6 +144,13 @@ body{background:var(--darker);color:#fff;font-family:'Share Tech Mono',monospace
 .util-btn:hover{background:rgba(255,42,244,.15);border-color:var(--pink);color:#fff;box-shadow:0 0 10px rgba(255,42,244,.25);}
 .util-btn.lofi-on{border-color:var(--up);color:var(--up);box-shadow:0 0 8px rgba(0,255,136,.2);}
 
+/* Add to your style.css (at the end or near other util-btn definitions) */
+#util-btns .util-btn {
+  font-size: 18px;
+  padding: 15px 30px;
+  min-width: 120px;
+}
+
 /* ── LEADERBOARD ─────────────────────── */
 #lbo{position:fixed;inset:0;z-index:55;background:rgba(3,0,8,.96);backdrop-filter:blur(8px);display:none;flex-direction:column;align-items:center;padding:56px 16px 44px;overflow-y:auto;}
 #lbo.on{display:flex;}
