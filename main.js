@@ -1552,6 +1552,26 @@ function loop(){
     cam.position.y=Math.max(1.5,cam.position.y);
     cam.quaternion.setFromEuler(new THREE.Euler(pitch,yaw,0,'YXZ'));
 
+function replayIntro() {
+  // Hide all main UI sections except intro
+  document.getElementById('intro').style.display = 'block';
+
+  // Optionally hide other screens; include as needed
+  const idsToHide = ['loading', 'homepage', 'ex', 'lbo', 'fly'];
+  idsToHide.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+
+  // Optionally, reset intro animation state here
+  // Example: If you have a startIntro function for the cinematic, you can call it:
+  if (typeof startIntro === 'function') startIntro();
+}
+
+// Make function available globally for inline onclick=""
+window.replayIntro = replayIntro;
+
+     
     // Update plane mesh — visible & spinning propeller, trailing behind cam
     if(planeMesh){
       const behind=new THREE.Vector3(Math.sin(yaw)*6,-.8+Math.sin(pitch)*-3,Math.cos(yaw)*6);
