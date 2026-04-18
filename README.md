@@ -10,8 +10,8 @@
 ```
 
 **your crypto dashboard is boring. we fixed it.**
-live at https://adity63110.github.io/pump-city/
-        https://pumpcity.netlify.app/
+**live at https://adity63110.github.io/pump-city/  &
+        https://pumpcity.netlify.app/**
 
 [![Live](https://img.shields.io/badge/status-live-brightgreen?style=flat-square)](#)
 [![Solana](https://img.shields.io/badge/chain-Solana-9945FF?style=flat-square&logo=solana&logoColor=white)](#)
